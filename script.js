@@ -18,7 +18,7 @@ window.onscroll = () => {
         let height = sec.offsetHeight;
         let id = sec.getAttribute('id');
 
-        if(top >= offset && top < offset + height){
+        if (top >= offset && top < offset + height) {
             navLinks.forEach(links => {
                 links.classList.remove('active');
                 document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
@@ -36,7 +36,7 @@ window.onscroll = () => {
 };
 
 // scroll reveal
-ScrollReveal({ 
+ScrollReveal({
     // reset: true,
     distance: '80px',
     duration: 2000,
@@ -57,3 +57,25 @@ const typed = new Typed('.multiple-text', {
     loop: true
 });
 
+
+// Corrected sendMail function
+function sendMail() {
+    var params = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,  // Changed from duplicate 'name'
+        message: document.getElementById("message").value
+    };
+
+    const serviceID = "service_60dyrsb";
+    const templateID = "template_bmpa4wd";
+
+    emailjs.send(serviceID, templateID, params)
+        .then(res => {
+            document.getElementById("name").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("message").value = "";
+            console.log(res);
+            alert("Your message sent successfully");
+        })
+        .catch(err => console.log(err));
+}
